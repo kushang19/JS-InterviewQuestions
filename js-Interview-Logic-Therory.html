@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js</title>
+    <style>
+        *{margin: 0; padding: 0; box-sizing: border-box;}
+        h2{background-color: black; text-align: center; color: aqua;}
+    </style>
+</head>
+
+<body>
+<h2>JavaScript</h2>
+<script>
+
+// ---------------------------------Currying-------------------------------
+
+/*
+Currying is javascript is a technique in functional programming where a function is transformed into a sequence of functions, each taking a single argument. It allows you to break down a function that takes multiple arguments into a series of functions that each take one argument and return a new function that takes the next argument, and so on, until all arguments have been provided.
+
+Benefits of Currying
+1. Reusability: You can create specialized functions from a generic function.
+2. Function Composition: Currying allows easier composition of functions.
+3. Partial Application: You can fix some arguments of a function and create a new function.
+
+*/
+
+// 1)
+
+function add(a) {
+    return function(b) {
+        return a + b;
+    };
+}
+
+// Usage
+const add2 = add(2); // Returns a function that adds 2 to its argument
+console.log(add2(3)); // Output: 5
+
+// Or you can call it in one go
+console.log(add(2)(3)); // Output: 5
+
+
+// 2)
+// normal eg 
+const rect = function (l,b,h){
+  return l*b*h
+}
+
+console.log(rect(2,3,4));
+
+// currying eg
+
+function cArea(l){
+  return function(b){
+    return function(h){
+      return l*b*h
+    }
+  }
+}
+
+console.log(cArea(2)(3)(4));
+
+// Example of Currying JS with Arrow Functions
+
+const add = a => b => a + b;
+
+const add5 = add(5);
+
+console.log(add5(7)); // 12
+
+// ----------------------------------currying ------------------------------------
+
+
+// Hoisting
+
+var adi = 2
+beta=3
+let beta
+
+console.log(adi,beta);
+
+
+// ******************************* INTERVIEW QUESTIONS JS LOGIC ******************************//
+
+// Array Sorting
+var a = [1,6,4,5,9,7,2,8,3]
+var bc = ['kushang', 'vijay','gharat']
+
+console.log(a.sort());
+console.log(a.sort().reverse());
+console.log(bc.sort().reverse());
+
+// reverse a string
+var c = 'kushang gharat';
+var d = 'ganesh';
+console.log(c.split("").reduce((acc, char) => char + acc,""))
+console.log(d.split("").reverse().join(""))
+
+// even and odd number
+var e = [1,34,65,44,20,55,98]
+
+var even = [];
+var odd = []
+
+for(var i =0; i<e.length; i++){
+    if(e[i] % 2 === 0){
+        even.push(e[i])
+    }
+    else {
+         odd.push(e[i]);
+    }
+}
+
+console.log("Even numbers " + even)
+console.log("Odd numbers " + odd)
+
+// Remove duplicate number from array 
+let arr = ["apple", "mango", "apple","orange", "mango", "mango"];
+
+function removeDuplicates(arr) {
+let unique = []
+
+arr.forEach(el => {
+    if(!unique.includes(el)){
+        unique.push(el);
+    }
+});
+return unique;
+}
+console.log(removeDuplicates(arr));
+
+
+// Promises
+
+const apiURL = 'https://jsonplaceholder.typicode.com/users';
+
+function fetchUsers() {
+
+  fetch(apiURL)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json(); // Parse the JSON from the response
+    })
+    .then(data => {
+      console.log(data); // Log the data to the console
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+}
+
+fetchUsers();
+
+// Async function 
+
+async function harry(){
+  const response = await fetch(apiURL);
+  const data = await response.json()
+  console.log("==========================");
+  console.log(data);
+}
+
+harry();
+
+// setTimeout and setInterval
+
+const india = setTimeout(() => {
+  console.log("India vs England t20 semi-final");
+}, 1500)
+
+const res =  setInterval(() => {
+  console.log("India wins !!!");
+}, 1500)
+
+// to stop setInterval
+setTimeout(() => {
+clearInterval(res)
+}, 7000)
+
+// undefined and not define
+var g ;
+console.log(g)
+console.log(l)
+
+/* What is "this" keyword in Javascript ?? 
+
+In JavaScript, the this keyword refers to the object that is currently executing the code. Its value depends on the context in which it is used. 
+
+*/
+
+// Global Context
+console.log(this); // In a browser, this will log the window object
+
+// Function Context
+function showThis() {
+    console.log(this);
+}
+ 
+showThis(); // In non-strict mode, this will log the window object. In strict mode, it will log undefined.
+
+// Object Method Context
+const person = {
+    name: 'Alice',
+    greet: function() {
+        console.log(this.name);
+    }
+};
+
+person.greet(); // Logs 'Alice' because this refers to the person object
+
+// Constructor Function Context
+function Person(name) {
+    this.name = name;
+}
+
+const bob = new Person('Bob');
+console.log(bob.name); // Logs 'Bob' because this refers to the new instance
+
+/* Arrow Functions
+Arrow functions do not have their own this context. 
+Instead, they inherit this from the surrounding lexical context.*/
+
+const obj = {
+    name: 'Charlie',
+    greet: function() {
+        const innerFunc = () => {
+            console.log(this.name);
+        };
+        innerFunc();
+    }
+};
+
+obj.greet(); // Logs 'Charlie' because this refers to the obj object due to lexical scoping of arrow functions
+
+// Event Handlers
+document.getElementById('myButton').addEventListener('click', function() {
+    console.log(this); // Logs the button element because this refers to the element that received the event
+});
+
+
+/*
+Summary
+The value of "this" in JavaScript is determined by how a function is called:
+
+Global context: this refers to the global object.
+Function context: this refers to the global object (non-strict mode) or undefined (strict mode).
+Method context: this refers to the object the method is called on.
+Constructor context: this refers to the newly created instance.
+Arrow functions: this is lexically inherited from the surrounding context.
+Event handlers: this refers to the element that received the event.
+*/
+
+// CLOSURES
+/* How to explain closures in JavaScript and when to use it?
+
+The closure is created when a child functions to keep the environment of the parent’s scope even after the parent’s function has already executed.
+*/
+
+function outer(){
+    let x = "Apple"
+    
+    function inner(){
+        console.log(x);
+    }
+    
+    return inner();
+}
+
+const display = outer();
+
+// Hight Order Function : A higher-order function is a function that either takes one or more functions as arguments, returns a function, or both
+
+function greet(name, formater){
+    return formater(name);
+}
+
+function toUpper(name){
+   return name.toUpperCase();
+}
+
+console.log(greet('Kushang', toUpper));
+
+
+// Local and Session storange
+
+/*
+Local Storage and Session Storage are both part of the Web Storage API in JavaScript, allowing you to store data in the browser. Here’s a brief overview and examples of how to use them:
+
+Local Storage
+Persistence: Data persists even after the browser is closed and reopened.
+Storage Limit: Around 5-10MB per domain (varies by browser).
+Scope: Data is stored per domain and is accessible by all tabs and windows of the same domain.
+*/
+
+// Store data
+localStorage.setItem('username', 'JohnDoe');
+
+// Retrieve data
+const username = localStorage.getItem('username');
+console.log(username); // Output: JohnDoe
+
+// Remove data
+localStorage.removeItem('username');
+
+// Clear all data
+localStorage.clear();
+
+
+/*
+Session Storage
+Persistence: Data persists only for the duration of the page session. It is cleared when the page or tab is closed.
+Storage Limit: Around 5-10MB per domain (varies by browser).
+Scope: Data is stored per tab, and is not accessible across different tabs or windows.
+*/
+
+// Store data
+sessionStorage.setItem('sessionToken', 'abc123');
+
+// Retrieve data
+const sessionToken = sessionStorage.getItem('sessionToken');
+console.log(sessionToken); // Output: abc123
+
+// Remove data
+sessionStorage.removeItem('sessionToken');
+
+// Clear all data
+sessionStorage.clear();
+
+
+
+
+// Difference between Arrow function and Regular function in js
+
+/*
+Arrow Function:
+Does not have its own this context. It lexically inherits this from the parent scope at the time it is defined.
+*/
+
+const obj1 = {
+    value: 10,
+    arrowFunc: () => {
+        console.log(this.value); // Output: undefined
+    },
+    regularFunc: function() {
+        console.log(this.value); // Output: 10
+    }
+};
+
+obj1.arrowFunc();
+obj1.regularFunc();
+
+
+/*
+In the example above, arrowFunc does not have its own this, so it refers to the this of the lexical scope, which is the global object (undefined in strict mode). regularFunc, on the other hand, has its own this, which refers to obj.
+*/
+
+
+// REST Operator
+const [first, second, ...rest] = [10, 20, 30, 40, 50];
+console.log(first);  // Output: 10
+console.log(second); // Output: 20
+console.log(rest);   // Output: [30, 40, 50]
+
+
+// Spread Operator
+
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const combined = [...arr1, ...arr2];
+console.log(combined); // Output: [1, 2, 3, 4, 5, 6]
+
+
+// ******************************* INTERVIEW QUESTIONS JS LOGIC ******************************//
+
+</script>
+</body>
+</html>
