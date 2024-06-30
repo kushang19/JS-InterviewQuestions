@@ -14,7 +14,7 @@
 <h2>JavaScript</h2>
 <script>
 
-// ---------------------------------Currying-------------------------------
+// --------------------------------- Currying -------------------------------
 
 /*
 Currying is javascript is a technique in functional programming where a function is transformed into a sequence of functions, each taking a single argument. It allows you to break down a function that takes multiple arguments into a series of functions that each take one argument and return a new function that takes the next argument, and so on, until all arguments have been provided.
@@ -70,16 +70,65 @@ const add5 = add(5);
 
 console.log(add5(7)); // 12
 
-// ----------------------------------currying ------------------------------------
+// ---------------------------------- Currying ------------------------------------
 
 
-// Hoisting
+// ---------------------------------- Hoisting --------------------------------------
 
-var adi = 2
-beta=3
-let beta
+/*
+In JavaScript, hoisting is a behavior in which variable and function declarations are moved to the top of their containing scope during the compilation phase. This means that you can use variables and functions before they are declared. However, the way hoisting works with var, let, and const is different.
+*/
 
-console.log(adi,beta);
+// ---- VAR HOISTING -----
+// Variables declared with var are hoisted to the top of their scope and initialized with undefined.
+
+console.log(x); // Output: undefined
+var x = 5;
+console.log(x); // Output: 5
+
+
+
+// ---- LET & CONST HOISTING ----
+/*
+Variables declared with let and const are hoisted to the top of their scope but are not initialized. They are in a "temporal dead zone" from the start of the block until the declaration is encountered. Using the variable before the declaration will result in a ReferenceError.
+*/ 
+
+console.log(y); // ReferenceError: Cannot access 'y' before initialization
+let y = 10;
+console.log(y); // Output: 10
+
+
+console.log(z); // ReferenceError: Cannot access 'z' before initialization
+const z = 15;
+console.log(z); // Output: 15
+
+
+
+// ------------- Difference between let and const ------------
+/*
+let:
+
+Allows reassignment.
+Block-scoped.
+Hoisted but not initialized (temporal dead zone).
+
+const:
+
+Does not allow reassignment.
+Block-scoped.
+Hoisted but not initialized (temporal dead zone).
+The value itself is mutable if it is an object or array, but the variable cannot be reassigned.
+*/ 
+
+// Using `let` for a loop counter
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+// Using `const` for a constant value
+const PI = 3.14159;
+console.log(PI);
+
 
 
 // ******************************* INTERVIEW QUESTIONS JS LOGIC ******************************//
@@ -183,8 +232,8 @@ clearInterval(res)
 
 // undefined and not define
 var g ;
-console.log(g)
-console.log(l)
+console.log(g) // undefined
+console.log(l) // notdefined
 
 /* What is "this" keyword in Javascript ?? 
 
@@ -247,11 +296,17 @@ Summary
 The value of "this" in JavaScript is determined by how a function is called:
 
 Global context: this refers to the global object.
+
 Function context: this refers to the global object (non-strict mode) or undefined (strict mode).
+
 Method context: this refers to the object the method is called on.
+
 Constructor context: this refers to the newly created instance.
+
 Arrow functions: this is lexically inherited from the surrounding context.
+
 Event handlers: this refers to the element that received the event.
+
 */
 
 // CLOSURES
@@ -355,7 +410,9 @@ obj1.regularFunc();
 
 
 /*
-In the example above, arrowFunc does not have its own this, so it refers to the this of the lexical scope, which is the global object (undefined in strict mode). regularFunc, on the other hand, has its own this, which refers to obj.
+In the example above, arrowFunc does not have its own this, so it refers to the this of the lexical scope, which is the global object (undefined in strict mode). 
+
+regularFunc, on the other hand, has its own this, which refers to obj.
 */
 
 
