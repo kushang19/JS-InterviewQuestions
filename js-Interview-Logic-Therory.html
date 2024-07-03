@@ -21,7 +21,9 @@ Currying is javascript is a technique in functional programming where a function
 
 Benefits of Currying
 1. Reusability: You can create specialized functions from a generic function.
+
 2. Function Composition: Currying allows easier composition of functions.
+
 3. Partial Application: You can fix some arguments of a function and create a new function.
 
 */
@@ -73,13 +75,38 @@ console.log(add5(7)); // 12
 // ---------------------------------- Currying ------------------------------------
 
 
+
+
+// ------------------ Event-bubbling + Event-Capturing +  Event-Delegation -------------
+
+/*
+https://www.geeksforgeeks.org/what-is-event-bubbling-and-event-capturing-in-javascript/
+https://www.geeksforgeeks.org/event-delegation-in-javascript/
+*/
+
+
+
+
 // ---------------------------------- Hoisting --------------------------------------
 
 /*
-In JavaScript, hoisting is a behavior in which variable and function declarations are moved to the top of their containing scope during the compilation phase. This means that you can use variables and functions before they are declared. However, the way hoisting works with var, let, and const is different.
+
+What is Hoisting in JavaScript?
+
+1. variable and function declarations are moved to the top of their respective scopes during the 
+compilation phase. 
+
+2. now where these declarations appear within a scope, they can be accessed throughout that scope.
+
+3. Note: JavaScript only hoists declarations, not initializations.
+
+    Sequence of variable declaration ( Declaration –> Initialisation/Assignment –> Usage  )
+
+4. However, the way hoisting works with var, let, and const is different.
 */
 
-// ---- VAR HOISTING -----
+//                                     ---- VAR HOISTING ----
+
 // Variables declared with var are hoisted to the top of their scope and initialized with undefined.
 
 console.log(x); // Output: undefined
@@ -87,10 +114,14 @@ var x = 5;
 console.log(x); // Output: 5
 
 
-
-// ---- LET & CONST HOISTING ----
+//                                 ---- LET & CONST HOISTING ----
 /*
-Variables declared with let and const are hoisted to the top of their scope but are not initialized. They are in a "temporal dead zone" from the start of the block until the declaration is encountered. Using the variable before the declaration will result in a ReferenceError.
+
+Variables declared with let and const are hoisted to the top of their scope but are not initialized. 
+
+They are in a "temporal dead zone" from the start of the block until the declaration is encountered. 
+
+Using the variable before the declaration will result in a ReferenceError.
 */ 
 
 console.log(y); // ReferenceError: Cannot access 'y' before initialization
@@ -417,6 +448,14 @@ regularFunc, on the other hand, has its own this, which refers to obj.
 
 
 // REST Operator
+
+function abc(a, ...rest) {
+return rest;
+}
+console.log(abc(10, 1, 2, 3, 4, 5)); // [ 1, 2, 3, 4, 5 ]
+
+
+
 const [first, second, ...rest] = [10, 20, 30, 40, 50];
 console.log(first);  // Output: 10
 console.log(second); // Output: 20
@@ -425,10 +464,70 @@ console.log(rest);   // Output: [30, 40, 50]
 
 // Spread Operator
 
+function abc(a, b, c) {
+return a + b + c;
+}
+
+console.log(abc(...[1, 2, 3])); //6
+
+
 const arr1 = [1, 2, 3];
 const arr2 = [4, 5, 6];
 const combined = [...arr1, ...arr2];
 console.log(combined); // Output: [1, 2, 3, 4, 5, 6]
+
+
+
+// -------------------------------- Callback Function  ----------------------------
+
+/*
+A callback is a function passed as an argument to another function, which gets invoked after the main function completes its execution. You pass the callback function to the main function as an argument, and once the main function finishes its task, it calls the callback function to deliver a result.
+
+Callbacks enable you to handle the outcomes of asynchronous operations in a non-blocking way. This means your program can keep running while the operation is ongoing.
+*/
+
+
+function mainFunction(callback) {
+  console.log("Performing operation...");
+  // Use setTimeout to simulate an asynchronous operation
+  setTimeout(function() {
+    callback("Operation complete");
+  }, 1000);
+}
+
+// Define the callback function
+function callbackFunction(result) {
+  console.log("Result: " + result);
+}
+
+// Call the main function with the callback function
+mainFunction(callbackFunction);
+//This code is contributed by Veerendra Singh Rajpoot
+
+
+
+
+// ----------------------------- Random number (max,mim) -----------------------------
+
+const min = 200;
+const max = 300;
+const num = [];
+
+for(let i =0; i<2; i++){
+     num.push(Math.floor(Math.random() * (max - min) + min ))
+    }
+console.log(num)
+
+// ----------------------------- Reverse Words -----------------------------
+
+
+function reverseWords(str) {
+  return str.split(' ').reverse().join(' ');
+}
+
+const input = "my name is Kushang";
+const output = reverseWords(input);
+console.log(output); // Output: "Kushang is name my"
 
 
 // ******************************* INTERVIEW QUESTIONS JS LOGIC ******************************//
