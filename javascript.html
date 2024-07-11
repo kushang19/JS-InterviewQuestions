@@ -7,6 +7,7 @@
     <style>
         *{margin: 0; padding: 0; box-sizing: border-box;}
         h2{background-color: black; text-align: center; color: aqua;}
+        /* https://www.youtube.com/watch?v=wW-Iaxm_X0A&ab_channel=HarkiratSingh */
     </style>
 </head>
 
@@ -85,6 +86,160 @@ https://www.geeksforgeeks.org/event-delegation-in-javascript/
 */
 
 
+// ******************************* INTERVIEW QUESTIONS JS LOGIC ******************************//
+
+
+// Promises
+
+const apiURL = 'https://jsonplaceholder.typicode.com/users';
+
+function fetchUsers() {
+
+  fetch(apiURL)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json(); // Parse the JSON from the response
+    })
+    .then(data => {
+      console.log(data); // Log the data to the console
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+}
+
+fetchUsers();
+
+// Async function 
+
+async function harry(){
+  const response = await fetch(apiURL);
+  const data = await response.json()
+  console.log("==========================");
+  console.log(data);
+}
+
+harry();
+
+// setTimeout and setInterval
+
+const india = setTimeout(() => {
+  console.log("India vs England t20 semi-final");
+}, 1500)
+
+const res =  setInterval(() => {
+  console.log("India wins !!!");
+}, 1500)
+
+// to stop setInterval
+setTimeout(() => {
+clearInterval(res)
+}, 7000)
+
+// undefined and not define
+var g ;
+console.log(g) // undefined
+console.log(l) // notdefined
+
+
+// Local and Session storange
+
+/*
+Local Storage and Session Storage are both part of the Web Storage API in JavaScript, allowing you to store data in the browser. Here’s a brief overview and examples of how to use them:
+
+Local Storage
+Persistence: Data persists even after the browser is closed and reopened.
+Storage Limit: Around 5-10MB per domain (varies by browser).
+Scope: Data is stored per domain and is accessible by all tabs and windows of the same domain.
+*/
+
+// Store data
+localStorage.setItem('username', 'JohnDoe');
+
+// Retrieve data
+const username = localStorage.getItem('username');
+console.log(username); // Output: JohnDoe
+
+// Remove data
+localStorage.removeItem('username');
+
+// Clear all data
+localStorage.clear();
+
+
+/*
+Session Storage
+Persistence: Data persists only for the duration of the page session. It is cleared when the page or tab is closed.
+Storage Limit: Around 5-10MB per domain (varies by browser).
+Scope: Data is stored per tab, and is not accessible across different tabs or windows.
+*/
+
+// Store data
+sessionStorage.setItem('sessionToken', 'abc123');
+
+// Retrieve data
+const sessionToken = sessionStorage.getItem('sessionToken');
+console.log(sessionToken); // Output: abc123
+
+// Remove data
+sessionStorage.removeItem('sessionToken');
+
+// Clear all data
+sessionStorage.clear();
+
+// REST Operator
+
+function abc(a, ...rest) {
+return rest;
+}
+console.log(abc(10, 1, 2, 3, 4, 5)); // [ 1, 2, 3, 4, 5 ]
+
+const [first, second, ...rest] = [10, 20, 30, 40, 50];
+console.log(first);  // Output: 10
+console.log(second); // Output: 20
+console.log(rest);   // Output: [30, 40, 50]
+
+
+// Spread Operator
+
+function abc(a, b, c) {
+return a + b + c;
+}
+
+console.log(abc(...[1, 2, 3])); //6
+
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const combined = [...arr1, ...arr2];
+console.log(combined); // Output: [1, 2, 3, 4, 5, 6]
+
+
+// ----------------------------- Random number (max,mim) -----------------------------
+
+const min = 200;
+const max = 300;
+const num = [];
+
+for(let i =0; i<2; i++){
+     num.push(Math.floor(Math.random() * (max - min) + min ))
+    }
+console.log(num)
+
+// ----------------------------- Reverse Words -----------------------------
+
+
+function reverseWords(str) {
+  return str.split(' ').reverse().join(' ');
+}
+
+const input = "my name is Kushang";
+const output = reverseWords(input);
+console.log(output); // Output: "Kushang is name my"
+
+
+// ******************************* INTERVIEW QUESTIONS JS THEORY ******************************//
 
 
 // ---------------------------------- Hoisting --------------------------------------
@@ -93,10 +248,8 @@ https://www.geeksforgeeks.org/event-delegation-in-javascript/
 
 What is Hoisting in JavaScript?
 
-1. variable and function declarations are moved to the top of their respective scopes during the 
-compilation phase. 
-
-2. now where these declarations appear within a scope, they can be accessed throughout that scope.
+1. "variable" and "function" declarations are moved to the top of their respective scopes during the 
+compilation phase. Now, where these declarations appear within a scope, they can be accessed throughout that scope.
 
 3. Note: JavaScript only hoists declarations, not initializations.
 
@@ -160,70 +313,39 @@ for (let i = 0; i < 5; i++) {
 const PI = 3.14159;
 console.log(PI);
 
+// -------------------------------- Callback Function  ----------------------------
+
+/*
+A callback is a function passed as an argument to another function, which gets invoked after the main function completes its execution. You pass the callback function to the main function as an argument, and once the main function finishes its task, it calls the callback function to deliver a result.
+
+Callbacks enable you to handle the outcomes of asynchronous operations in a non-blocking way. This means your program can keep running while the operation is ongoing.
+*/
 
 
-// ******************************* INTERVIEW QUESTIONS JS LOGIC ******************************//
+function mainFunction(callback) {
+  console.log("Performing operation...");
 
-
-
-// Promises
-
-const apiURL = 'https://jsonplaceholder.typicode.com/users';
-
-function fetchUsers() {
-
-  fetch(apiURL)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      return response.json(); // Parse the JSON from the response
-    })
-    .then(data => {
-      console.log(data); // Log the data to the console
-    })
-    .catch(error => {
-      console.error('There has been a problem with your fetch operation:', error);
-    });
+  // Use setTimeout to simulate an asynchronous operation
+  setTimeout(function() {
+    callback("Operation complete");
+  }, 1000);
 }
 
-fetchUsers();
-
-// Async function 
-
-async function harry(){
-  const response = await fetch(apiURL);
-  const data = await response.json()
-  console.log("==========================");
-  console.log(data);
+// Define the callback function
+function callbackFunction(result) {
+  console.log("Result: " + result);
 }
 
-harry();
+// Call the main function with the callback function
+mainFunction(callbackFunction);
+//This code is contributed by Veerendra Singh Rajpoot
 
-// setTimeout and setInterval
 
-const india = setTimeout(() => {
-  console.log("India vs England t20 semi-final");
-}, 1500)
-
-const res =  setInterval(() => {
-  console.log("India wins !!!");
-}, 1500)
-
-// to stop setInterval
-setTimeout(() => {
-clearInterval(res)
-}, 7000)
-
-// undefined and not define
-var g ;
-console.log(g) // undefined
-console.log(l) // notdefined
+// ---------------------------------------------------------------------------
 
 /* What is "this" keyword in Javascript ?? 
 
 this keyword refers to the object that is currently executing the code. 
-
 
 Its value depends on the context in which it is used. 
 
@@ -328,59 +450,26 @@ function toUpper(name){
 console.log(greet('Kushang', toUpper));
 
 
-// Local and Session storange
-
-/*
-Local Storage and Session Storage are both part of the Web Storage API in JavaScript, allowing you to store data in the browser. Here’s a brief overview and examples of how to use them:
-
-Local Storage
-Persistence: Data persists even after the browser is closed and reopened.
-Storage Limit: Around 5-10MB per domain (varies by browser).
-Scope: Data is stored per domain and is accessible by all tabs and windows of the same domain.
-*/
-
-// Store data
-localStorage.setItem('username', 'JohnDoe');
-
-// Retrieve data
-const username = localStorage.getItem('username');
-console.log(username); // Output: JohnDoe
-
-// Remove data
-localStorage.removeItem('username');
-
-// Clear all data
-localStorage.clear();
-
-
-/*
-Session Storage
-Persistence: Data persists only for the duration of the page session. It is cleared when the page or tab is closed.
-Storage Limit: Around 5-10MB per domain (varies by browser).
-Scope: Data is stored per tab, and is not accessible across different tabs or windows.
-*/
-
-// Store data
-sessionStorage.setItem('sessionToken', 'abc123');
-
-// Retrieve data
-const sessionToken = sessionStorage.getItem('sessionToken');
-console.log(sessionToken); // Output: abc123
-
-// Remove data
-sessionStorage.removeItem('sessionToken');
-
-// Clear all data
-sessionStorage.clear();
-
-
-
-
 // Difference between Arrow function and Regular function in js
 
 /*
 Arrow Function:
 Does not have its own this context. It lexically inherits this from the parent scope at the time it is defined.
+
+
+Advantages of Arrow Functions:
+Arrow functions reduce the size of the code.
+The return statement and function brackets are optional for single-line functions.
+It increases the readability of the code.
+Arrow functions provide a lexical this binding. It means, they inherit the value of “this” from the enclosing scope. This feature can be advantageous when dealing with event listeners or callback functions where the value of “this” can be uncertain.
+
+Limitations of Arrow Functions:
+Arrow functions do not have the prototype property.
+Arrow functions cannot be used with the new keyword.
+Arrow functions cannot be used as constructors.
+These functions are anonymous and it is hard to debug the code.
+Arrow functions cannot be used as generator functions that use the yield keyword to return multiple values over time.
+
 */
 
 const obj1 = {
@@ -404,87 +493,132 @@ regularFunc, on the other hand, has its own this, which refers to obj.
 */
 
 
-// REST Operator
 
-function abc(a, ...rest) {
-return rest;
-}
-console.log(abc(10, 1, 2, 3, 4, 5)); // [ 1, 2, 3, 4, 5 ]
+// ----------------------------- call, apply , bind  --------------------------------------------- 
 
+// call syntax : functionName.call(this.Arg, arg1, arg2,...);
 
+// call syntax : functionName.apply(this.Arg, [argsArray]);
 
-const [first, second, ...rest] = [10, 20, 30, 40, 50];
-console.log(first);  // Output: 10
-console.log(second); // Output: 20
-console.log(rest);   // Output: [30, 40, 50]
+// call syntax : const newFunction = functionName.bind(this.Arg, arg1,arg2,...)
 
-
-// Spread Operator
-
-function abc(a, b, c) {
-return a + b + c;
+{
+  function greet(greetings, punctuation){
+    console.log(greetings + ' ' + this.name + punctuation);
 }
 
-console.log(abc(...[1, 2, 3])); //6
+const person = {name: 'kushang'}
+greet.call(person, 'Hello', '!');
+greet.apply(person,['Hi','...'])
+const greetPerson = greet.bind(person, 'Hey');
+greetPerson('!!')
+}
 
 
-const arr1 = [1, 2, 3];
-const arr2 = [4, 5, 6];
-const combined = [...arr1, ...arr2];
-console.log(combined); // Output: [1, 2, 3, 4, 5, 6]
+{
+  // what will be the output ??
+
+  console.log("start") 
+    Promise.resolve().then(()=>console.log('Promise 1')); 
+    setTimeout(()=>console.log('Timeout 1'),0); 
+    Promise.resolve().then(()=>console.log('Promise 2')); 
+    setTimeout(()=>console.log('Timeout 2'),0); 
+    console.log('End')
+}
 
 
+{
 
-// -------------------------------- Callback Function  ----------------------------
+  // ----------------------------- Debouncing and Throttling in JavaScript ---------------------------
+
+  /*
+  
+Debouncing and throttling are two techniques used to control how often a function is executed over time, typically in response to events like scrolling, resizing, or typing. They help in optimizing performance by limiting the number of times a function is called.
+
+Debouncing
+Debouncing ensures that a function is only executed after a certain amount of time has passed since it was last called. If the function is called again before the time has elapsed, the timer resets. This is useful for scenarios where you want to limit the rate at which a function is executed, such as waiting for the user to stop typing before making an API request.
+
+  */
+
+  function debounce(func, delay) {
+        let timeoutId;
+        return function(...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                func.apply(this, args);
+            }, delay);
+        };
+    }
+
+    // Usage
+    const handleResize = debounce(() => {
+    console.log('debounce');
+    }, 1000);
+
+    window.addEventListener('resize', handleResize);
+
+    // --------------------------- throttle ----------------------------------
+
+    /*
+      Throttling:
+
+      Throttling ensures that a function is only executed once every specified amount of time, regardless of how many times the event is triggered. This is useful for scenarios where you want to limit the execution rate of a function, such as handling a scroll event to update a fixed header.
+    */
+
+    function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+}
+
+// Usage
+const handleScroll = throttle(() => {
+//   console.log('Scroll event triggered!');
+  console.log('throttle');
+}, 1000);
+
+// window.addEventListener('scroll', handleScroll);
+window.addEventListener('resize', handleScroll);
 
 /*
-A callback is a function passed as an argument to another function, which gets invoked after the main function completes its execution. You pass the callback function to the main function as an argument, and once the main function finishes its task, it calls the callback function to deliver a result.
 
-Callbacks enable you to handle the outcomes of asynchronous operations in a non-blocking way. This means your program can keep running while the operation is ongoing.
+Difference Between Debouncing and Throttling
+
+Debouncing delays the function execution until a certain time has passed since the last call.
+
+Throttling limits the function execution to once every specified time interval, regardless of how many times the event is triggered.
+
+These techniques help improve performance and user experience by reducing the number of function executions, especially for events that can be triggered frequently.
+
 */
 
-
-function mainFunction(callback) {
-  console.log("Performing operation...");
-  // Use setTimeout to simulate an asynchronous operation
-  setTimeout(function() {
-    callback("Operation complete");
-  }, 1000);
 }
 
-// Define the callback function
-function callbackFunction(result) {
-  console.log("Result: " + result);
+
+// --------------------------- Calling Multiple APIs -----------------------------
+
+{
+
+const fetchApi1 = fetch('https://jsonplaceholder.typicode.com/todos/1');
+const fetchApi2 = fetch('https://jsonplaceholder.typicode.com/todos/2');
+const fetchApi3 = fetch('https://jsonplaceholder.typicode.com/todos/3');
+
+Promise.all([fetchApi1, fetchApi2, fetchApi3])
+.then(responses => Promise.all(responses.map(res => res.json())))
+.then(data => {
+  console.log('Data from API 1:', data[0]);
+  console.log('Data from API 2:', data[1]);
+  console.log('Data from API 3:', data[2]);
+})
+.catch(error => {
+  console.error('One or more APIs failed:', error);
+});
 }
-
-// Call the main function with the callback function
-mainFunction(callbackFunction);
-//This code is contributed by Veerendra Singh Rajpoot
-
-
-
-
-// ----------------------------- Random number (max,mim) -----------------------------
-
-const min = 200;
-const max = 300;
-const num = [];
-
-for(let i =0; i<2; i++){
-     num.push(Math.floor(Math.random() * (max - min) + min ))
-    }
-console.log(num)
-
-// ----------------------------- Reverse Words -----------------------------
-
-
-function reverseWords(str) {
-  return str.split(' ').reverse().join(' ');
-}
-
-const input = "my name is Kushang";
-const output = reverseWords(input);
-console.log(output); // Output: "Kushang is name my"
 
 
 // ******************************* INTERVIEW QUESTIONS JS LOGIC ******************************//

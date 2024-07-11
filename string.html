@@ -1,0 +1,128 @@
+1. Reverse a String: Write a function that takes a string and returns the string reversed.
+
+2. Count Vowels: Write a function that counts the number of vowels (a, e, i, o, u) in a given string.
+
+3. Palindrome Check: Write a function that checks if a given string is a palindrome (reads the same backward as forward).
+
+4. Longest Word: Write a function that finds the longest word in a given string.
+
+5. Title Case a Sentence: Write a function that takes a string and returns it with the first letter of each word capitalized.
+
+6. Repeat a String: Write a function that repeats a given string a specified number of times.
+
+7. Remove Spaces: Write a function that removes all spaces from a given string.
+
+8. Replace Characters: Write a function that replaces all occurrences of a specified character in a string with another character.
+
+9. Anagram Check: Write a function that checks if two given strings are anagrams (contain the same characters in a different order).
+
+10. Find First Unique Character: Write a function that finds the first non-repeating character in a string.
+
+11. Count Substrings: Write a function that counts how many times a substring appears in a given string.
+
+12. Convert to Camel Case: Write a function that converts a string to camelCase notation.
+
+13. Check for Substring: Write a function that checks if a given substring is present in a string.
+
+14. Extract Numbers: Write a function that extracts all numbers from a given string and returns them as an array.
+
+15. Remove Duplicates: Write a function that removes duplicate characters from a string.
+
+16. Find Common Characters: Write a function that finds common characters between two strings.
+
+17. String Compression: Write a function that compresses a string using the counts of repeated characters (e.g., "aabcccccaaa" becomes "a2b1c5a3").
+
+18. URLify a String: Write a function that replaces all spaces in a string with '%20'.
+
+19. Character Frequency: Write a function that counts the frequency of each character in a string.
+
+20. Count Words: Write a function that counts the number of words in a given string.
+
+<!-- -------------------------- Solutions ----------------------------------------------- -->
+
+// 1. Reverse a String: Write a function that takes a string and returns the string reversed.
+
+
+let a = "kushang"
+
+function arrayFnc(str){
+    return str.split("").reverse().join("")
+}
+
+console.log( arrayFnc(a) )
+
+--------------------------
+let b = "my name is kushang"
+function arrayFnc(str){
+    return str.split(" ").reverse().join(" ")
+}
+
+console.log( arrayFnc(b) )
+
+==================================================================
+
+2. Count Vowels: Write a function that counts the number of vowels (a, e, i, o, u) in a given string.
+
+let b = "Hello, my name is Kushang"
+function arrayFnc(str){
+    let count = 0;
+    let vowels = 'aeiouAEIOU';
+    
+    for(let char of str){
+        if(vowels.includes(char)){
+            count++
+        }
+    }
+    return count
+}
+
+console.log( arrayFnc(b) )
+
+==============================================================
+
+// 3. Palindrome Check: Write a function that checks if a given string is a palindrome (reads the same backward as forward).
+
+let b = "madam"
+function arrayFnc(str){
+    return str === str.split("").reverse().join("")
+}
+
+console.log( arrayFnc(b) )
+
+==========================================
+
+// 4. Longest Word: Write a function that finds the longest word in a given string.
+
+let b = "Hello, my name is Kushang"
+function arrayFnc(str){
+    let words =  str.split(" ")
+    let longestWord = ''
+    
+    for(let word of words){
+        if(word.length > longestWord.length){
+            longestWord = word;
+        }
+    }    
+    
+    return longestWord
+
+}
+
+console.log( arrayFnc(b) )
+
+=====================================================
+
+// 5. Title Case a Sentence: Write a function that takes a string and returns it with the first letter of each word capitalized.
+
+let b = "Hello, my name is Kushang"
+function arrayFnc(str){
+    let words = str.toLowerCase().split(" ");
+    
+    const capitalWord = words.map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1)
+    });
+    
+    return capitalWord.join(" ")
+}
+
+console.log( arrayFnc(b) )

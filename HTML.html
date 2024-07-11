@@ -1,0 +1,72 @@
+Q1. How does a browser render HTML?
+
+{
+    1. Parsing HTML:
+    The browser parses the HTML document to create the DOM (Document Object Model) tree. This involves reading the HTML tags and constructing a tree structure where each node represents an HTML element.
+
+    2. Parsing CSS:
+    The browser parses the CSS (both inline and linked stylesheets) to create the CSSOM (CSS Object Model) tree. 
+    This tree represents the styles for the different elements in the HTML document.
+
+    3. Constructing the Render Tree:
+    The DOM and CSSOM trees are combined to create the Render Tree. This tree contains only the nodes required for rendering the page (e.g., hidden elements like <head> are excluded).
+
+    4. Layout:
+    The browser calculates the position and size of each node in the Render Tree. This process is known as "layout" or "reflow". During this step, the browser determines where each element should appear on the screen.
+
+    5. Painting:
+    The browser converts each node in the Render Tree into actual pixels on the screen. This involves drawing the visual representation of each element.
+
+    6. Compositing:
+    Modern browsers use layers to optimize rendering. The compositing step involves drawing these layers in the correct order to produce the final visual output on the screen.
+}
+
+
+Q2. What is the purpose of the DOCTYPE declaration?
+
+{
+    The DOCTYPE declaration is used to inform the browser about the version of HTML that the web page is written in. It ensures that the browser renders the page in standards mode rather than quirks mode. Standards mode adheres to web standards, while quirks mode attempts to emulate older browser behavior to ensure compatibility with legacy web pages.
+    
+    For example:
+    <!DOCTYPE html>
+
+    This declaration tells the browser to use HTML5 standards.
+
+
+}
+
+Q3. Difference between <div> and <section> tag
+
+{
+        <div> Tag:
+
+        Purpose: The <div> tag is a generic container used to group elements for styling (using CSS) or scripting (using JavaScript). It has no semantic meaning and does not convey any specific content structure or purpose.
+        Usage: Use <div> when there is no semantic meaning to the content, and you simply need a block-level container for styling or scripting purposes.
+
+            <div class="container">
+                <div class="header">Header</div>
+                <div class="content">Content</div>
+            </div>
+
+        
+        <section> Tag:
+
+        Purpose: The <section> tag defines a section in a document. It represents a standalone section that is thematically grouped, typically with a heading. It has semantic meaning and is used to divide content into meaningful sections.
+        Usage: Use <section> when you want to create a section of related content that forms part of the document's outline. Each <section> should ideally be accompanied by a heading (<h1>, <h2>, etc.).
+
+            <section>
+                <h1>Introduction</h1>
+                <p>This is the introduction section.</p>
+            </section>
+            <section>
+                <h1>Features</h1>
+                <p>This section describes the features.</p>
+            </section>
+
+            
+        Summary:
+        <div>: Generic container with no semantic meaning.
+        <section>: Thematic grouping of content with semantic meaning.
+              
+        
+}
