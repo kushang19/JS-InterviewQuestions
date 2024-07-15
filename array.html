@@ -435,3 +435,23 @@ const output1 = filteredArray(a100);
 
 console.log(output1); // [ 3, 4, 7, 1 ]
 
+==========================================================
+
+{
+
+
+const arr = [3,7,2,1,13,56,36,2]
+let val = 5
+
+
+function arrFnc(arr,val){
+    const b =  arr.splice(val)
+    return b.concat(arr)
+}
+
+console.log(arrFnc(arr,val))
+
+// result = [56,36,2,3,7,2,1,13]
+
+}
+
